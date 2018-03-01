@@ -2,7 +2,7 @@
 
 DNA ID with Node.js
 
-Getting Started
+Getting Started on Local Machine
 1. git clone https://github.com/GiarcEnoredlac/dnaid.git
 2. cd dnaid
 3. npm install
