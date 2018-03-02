@@ -4,9 +4,6 @@ const app = express();
 const routes = require('./routes');
 
 app.use('/static', express.static('public'));
-app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
-app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
-app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 // Set view engine with Pug
 app.set('view engine', 'pug');
