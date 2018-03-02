@@ -3,18 +3,24 @@
     .row
       .col-sm-6.col-sm-offset-3
         .center
-          h1 Say Hello
-          p Talk Nerdy to Us!
-        form
+          h1 Sign Up
+          p Subscribe for more information
+        form#mc-embedded-subscribe-form.validate(action='https://dnaid.us17.list-manage.com/subscribe/post?u=e76ae4b591879e47ffb539873&id=eba8253bcb', method='post', name='mc-embedded-subscribe-form', target='_blank', novalidate='')
           .row
             .col-sm-6
               .form-group
-                input.form-control(type='text', placeholder='Full Name')
+                input#mce-FNAME.form-control(type='text', value='', name='FNAME', placeholder='First Name')
             .col-sm-6
               .form-group
-                input.form-control(type='text', placeholder='Email')
-          .row
+                input#mce-LNAME.form-control(type='text', value='', name='LNAME', placeholder='Last Name')
             .col-sm-12
-              .form-group(style='')
-                input.form-control(type='text', placeholder="What's on your mind?")
-          input.btn.btn-transparent.btn-lg.btn-block(type='submit', value='Send It')
+              .form-group
+                input#mce-EMAIL.required.email.form-control(type='email', value='', name='EMAIL', placeholder='Email')
+          #mce-responses.clear
+            #mce-error-response.response(style='display:none')
+            #mce-success-response.response(style='display:none')
+          // real people should not fill this in and expect good things - do not remove this or risk form bot signups
+          div(style='position: absolute; left: -5000px;', aria-hidden='true')
+            input(type='text', name='b_e76ae4b591879e47ffb539873_eba8253bcb', tabindex='-1', value='')
+          .clear
+            input#mc-embedded-subscribe.button.btn.btn-transparent.btn-lg.btn-block(type='submit', value='Send', name='subscribe')
