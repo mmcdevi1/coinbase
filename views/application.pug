@@ -2,10 +2,12 @@ doctype html
 html(lang="en")
   head
     title DNA id
+    meta(content='width=device-width, initial-scale=1, maximum-scale=1', name='viewport')
     link(href="/static/stylesheets/bootstrap.css" type="text/css" rel="stylesheet")
     link(href="/static/stylesheets/styles.css" type="text/css" rel="stylesheet")
     script(src='https://code.jquery.com/jquery-3.3.1.min.js', integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=', crossorigin='anonymous')
     script(src='/static/javascript/text-slider.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
   body
     block content
     include partials/footer

@@ -3,14 +3,15 @@ extends application.pug
 block content
   div(class="home")
     include partials/header
-    div(class="container")
-      div(id="center")
-        div(class="row")
-          div(class="center hero-message")
-            h1(style="margin: 0 0 10px")
-              span(class="rotate") Curious about your DNA?, Want to help cure disease?, Need some extra cash?, Find out how much your DNA is worth
-            h3 Sign up for our Beta launch. First 1000 customers get DNA sequencing for free!
+    div(class="container main-image")
+      #wrapper
+        #page
+          #content_container
+            #content
+              section.text-center.hero.hero-message
+                h1 
+                  span(class="rotate") Curious about your DNA?, Want to help cure disease?, Need some extra cash?, Find out how much your DNA is worth
+                p.bold Sign up for our Beta launch. First 1000 customers get DNA sequencing for free!
   include partials/about_us          
   include partials/team
-  include partials/advisors
   include partials/contact_form
