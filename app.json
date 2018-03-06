@@ -1,0 +1,7 @@
+{
+  "name": "DNA ID",
+  "description": "A marketplace for DNA",
+  "repository": "https://github.com/GiarcEnoredlac/dnaid",
+  "keywords": ["dna", "medicine", "genetics"],
+  "image": "heroku/nodejs"
+}
