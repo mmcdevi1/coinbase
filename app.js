@@ -18,7 +18,6 @@ app.use(routes);
 // })
 
 // Listen on port 3000
-var port = process.env.PORT || 3000;
-app.listen(port, function () {
-  console.log(`Listening to port ${port} ..`)
-})
+(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
