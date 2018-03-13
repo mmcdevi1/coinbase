@@ -48,6 +48,9 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 .main-image {
   height: 100%;
 }
+.hero-image {
+  margin: 0 auto;
+}
 #page {
     display:table;
     overflow:hidden;
