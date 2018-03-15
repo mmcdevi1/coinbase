@@ -1780,6 +1780,7 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+  margin: 0 auto;
 }
 
 /* line 86, /usr/local/rvm/gems/ruby-2.4.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_scaffolding.scss */
