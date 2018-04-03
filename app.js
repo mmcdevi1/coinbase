@@ -9,7 +9,7 @@ app.use('/static', express.static('public'));
 app.set('view engine', 'pug');
 
 // Set up routes
-app.use(routes);
+// app.use(routes);
 
 // app.use(function (req, res, next) {
 //   const err = new Error('Page not found');
@@ -18,6 +18,6 @@ app.use(routes);
 // })
 
 // Listen on port 3000
-app.listen(process.env.PORT || 3000, function(){
+app.listen(process.env.PORT || 5000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
