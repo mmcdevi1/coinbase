@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 // Require Models
 require('./models/User'); // USER MODEL
@@ -10,7 +11,7 @@ require('./models/User'); // USER MODEL
 // Require Routes
 const authRoutes = require('./routes/authRoutes');
 
-// Connect MongoDB with mLab.com
+// Connect MongoDB with mLab.com in Development
 mongoose.connect(keys.mongoURI);
 
 // Declare app
@@ -18,8 +19,7 @@ const app = express();
 
 // Setup Body Parser
 app.use(bodyParser.json());
-
-app.use('/static', express.static('public'));
+app.use(cors());
 
 // Use Routes
 app.use(authRoutes);

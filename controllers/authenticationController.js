@@ -7,7 +7,7 @@ function sessionsToken (user) {
   return jwt.encode({ sub: user.id, iat: timestamp }, keys.tokenKey)
 }
 
-// To be used in the User registration POST route in routes/authRoutes.js
+// To be used in the User REGISTRATION POST route in routes/authRoutes.js
 exports.registration = (req, res, next) => {
   // Pull properties from the req.body object
   const { firstName, lastName, email, password, username, researcher, contributor } = req.body;
@@ -54,4 +54,9 @@ exports.registration = (req, res, next) => {
 
     res.send({ token: sessionsToken(user) });
   })
+}
+
+// To be used in the User LOGIN POST route in routes/authRoutes.js
+exports.login = (req, res, next) => {
+  res.send({ token: sessionsToken(req.user) })
 }
