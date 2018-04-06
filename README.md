@@ -6,4 +6,4 @@ Getting Started on Local Machine
 1. git clone https://github.com/GiarcEnoredlac/dnaid.git
 2. cd dnaid
 3. npm install
-4. npm start
+4. npm run dev
