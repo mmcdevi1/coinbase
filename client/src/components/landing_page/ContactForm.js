@@ -38,7 +38,7 @@ class ContactForm extends React.Component {
                   <input type="text" name="b_e76ae4b591879e47ffb539873_eba8253bcb" tabIndex={-1} defaultValue />
                 </div>
                 <div className="clear">
-                  <input id="mc-embedded-subscribe" type="submit" defaultValue="Send" name="subscribe" className="button btn btn-transparent btn-lg btn-block" />
+                  <input id="mc-embedded-subscribe" type="submit" defaultValue="Join in" name="subscribe" className="button btn btn-transparent btn-lg btn-block" />
                 </div>
               </form>
             </div>
