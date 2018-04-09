@@ -17,22 +17,13 @@ exports.registration = (req, res, next) => {
     return res.status(422).send({ error: 'Email, password and username are required!' })
   }
 
-  // Determine if email exists
-  User.findOne({ email: email }, (err, user) => {
+  // Determine if email or username exists
+  User.findOne({ $or: [ {username: username}, {email: email} ] }, (err, user) => {
     if (err) { return next(err) }
 
     if (user) {
-      return res.status(422).send({ error: 'Sorry, that email already exists!' })
-    }
-  })
-
-  // Determine if username exists
-  User.findOne({ username: username }, (err, user) => {
-    if (err) { return next(err) }
-
-    if (user) {
-      return res.status(422).send({ error: 'Sorry, that username already exists!' })
-    }
+      return res.status(422).send({ error: 'Sorry, this email or username already exists!' })
+    } 
   })
 
   // Create new user fields
@@ -52,11 +43,11 @@ exports.registration = (req, res, next) => {
   User.create(user, function (err, user) {
     if (err) { return next(err) }
 
-    res.send({ token: sessionsToken(user) });
+    res.send({ token: sessionsToken(user), user: user });
   })
 }
 
 // To be used in the User LOGIN POST route in routes/authRoutes.js
 exports.login = (req, res, next) => {
-  res.send({ token: sessionsToken(req.user) })
+  res.send({ token: sessionsToken(req.user), user: req.user });
 }

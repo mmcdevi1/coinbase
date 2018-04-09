@@ -17,11 +17,13 @@ router.post('/register', Authentication.registration);
 // User Login POST route
 router.post('/login', requireLogin, Authentication.login);
 
-router.get('/', authenticateUser,(req, res) => {
-  User.find({}, (err, user) => {
-    if (err) { res.status(500).send({ error: err.message }) }
-    res.send({ users: user })
-  })
-})
+// Current user API
+router.get('/api/current_user', authenticateUser, (req, res) => {
+  if (req.user) {
+    res.send(req.user)
+  } else {
+    res.send(false)
+  }
+});
 
 module.exports = router;

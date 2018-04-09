@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AnchorLink from 'react-anchor-link-smooth-scroll'
+import { connect } from 'react-redux';
+import { UNAUTH_USER } from '../../actions/types';
 
 class Header extends React.Component {
   renderLogo () {
@@ -22,6 +25,17 @@ class Header extends React.Component {
     });
   }
 
+  renderLinks () {
+    if (this.props.auth) {
+      return <li><a onClick={() => this.props.logoutUser()}>{this.props.currentUser.username} Logout</a></li>
+    } else {
+      return [
+        <li><Link to="/login">Login</Link></li>,
+        <li><Link to="/register">Register</Link></li>
+      ]
+    }
+  }
+
   render () {
     return (
       <header style={{backgroundColor: this.state.background}} id="top" role="banner" className="navbar navbar-fixed-top bs-docs-nav">
@@ -31,6 +45,7 @@ class Header extends React.Component {
           </div>
           <nav className="navbar-collapse bs-navbar-collapse">
             <ul className="nav navbar-nav navbar-right">
+              {this.renderLinks()}
               <li><AnchorLink href="#about-us">About Us</AnchorLink></li>
               <li><AnchorLink href="#team">Team</AnchorLink></li>
               <li><AnchorLink href="#contact_form" className="btn btn-success btn-lg">Join In</AnchorLink></li>
@@ -42,4 +57,23 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+function mapStateToProps (state) {
+  return {
+    auth: state.auth.authenticated,
+    currentUser: state.auth.currentUser
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    logoutUser: function () {
+      localStorage.removeItem('token');
+
+      dispatch({
+        type: UNAUTH_USER
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
