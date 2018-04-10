@@ -15,16 +15,8 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={LandingPage} />
-              <div className="container main-image">
-                <div id="wrapper">
-                  <div id="page" className="form-width">
-                    <div id="content_container">
-                      <Route path="/register" component={Register} />
-                      <Route path="/login" component={Login} />
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />                    
             <Route path="/logout" component={Logout} />
             <Route path="/marketplace" component={AuthenticateUser(Marketplace)} />
           </Switch>

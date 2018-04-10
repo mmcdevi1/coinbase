@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { AUTH_USER, AUTH_ERROR } from '../../actions/types';
 import BackButton from './BackButton';
+import Center from './Center';
 
 const FIELDS = [
   { label: 'First Name', name: 'firstName' },
@@ -50,7 +51,7 @@ class Register extends React.Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div>
+      <Center>
         <BackButton />
         <div className="form-header center">
           <img id="logo" src={this.renderLogo()} alt="DNA ID Logo" />
@@ -77,7 +78,7 @@ class Register extends React.Component {
             Already have an account? <Link to="/login">Login</Link>
           </div>
         </form>
-      </div>
+      </Center>
     )
   }
 }

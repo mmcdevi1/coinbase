@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as types from '../../actions/types';
 import * as actions from '../../actions';
 import BackButton from './BackButton';
-
+import Center from './Center';
 
 class Login extends React.Component {
   componentWillMount () {
@@ -44,7 +44,7 @@ class Login extends React.Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div>
+      <Center>
         <BackButton />
         <div className="form-header center">
           <h3>Login</h3>
@@ -68,7 +68,7 @@ class Login extends React.Component {
             </div>
           </div>
         </form>
-      </div>
+      </Center>
     )
   }
 }
