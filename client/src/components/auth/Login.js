@@ -25,8 +25,15 @@ class Login extends React.Component {
   }
 
   renderField (field) {
+    const { label, type, input, meta: { error, touched } } = field;
+
     return (
-      <input className="form-control" {...field.input} placeholder={field.placeholder} type={field.type} />
+      <div className="form-group">
+        <input className={`form-control ${(touched && error) ? 'form-contol-error' : ''}`} {...field.input} placeholder={field.placeholder} type={field.type} />
+        <div className="error">
+          {(touched) ? error : ''}
+        </div>
+      </div>
     )
   }
 
@@ -34,7 +41,7 @@ class Login extends React.Component {
     if (this.props.errorMessage) {
       return (
         <div className="alert alert-danger">
-          Ooops
+          {this.props.errorMessage}
         </div>
       )
     }
@@ -50,14 +57,11 @@ class Login extends React.Component {
           <h3>Login</h3>
           <p>Please complete all fields.</p>
         </div>
+        {this.renderAlert()}
         <form onSubmit={handleSubmit(this.onFormSubmit.bind(this))}>
-          <div className="form-group">
-            <Field type="text" component={this.renderField} placeholder="Username" label="username" name="username" />
-          </div>
-          <div className="form-group">
-            <Field type="password" component={this.renderField} placeholder="Password" label="password" name="password" />
-          </div>
-          {this.renderAlert()}
+          <Field type="text" component={this.renderField} placeholder="Username" label="username" name="username" />
+          <Field type="password" component={this.renderField} placeholder="Password" label="password" name="password" />
+          
           <div className="form-group">
             <button action="submit" className="btn btn-primary btn-block">Log in</button>
           </div>
@@ -73,11 +77,32 @@ class Login extends React.Component {
   }
 }
 
+function validate (formProps) {
+  const errors = {};
+
+  if (!formProps.username) {
+    errors.username = 'Username is required.'
+  }
+
+  if (!formProps.password) {
+    errors.password = 'Password is required.'
+  }
+
+  return errors
+}
+
 function mapStateToProps (state) {
   return {
     authenticated: state.auth.authenticated,
     errorMessage: state.auth.error,
     currentUser: state.auth.currentUser
+  }
+}
+
+function authError (error) {
+  return {
+    type: types.AUTH_ERROR,
+    payload: error
   }
 }
 
@@ -93,7 +118,7 @@ function mapDispatchToProps (dispatch) {
           // Redirect
           history.push('/')
         })
-        .catch(actions.authError())
+        .catch(e => dispatch(authError('Invalid email or password. Please try again')))
     }
   }
 }
@@ -101,6 +126,7 @@ function mapDispatchToProps (dispatch) {
 const form = reduxForm({
   form: 'login',
   fields: ['username', 'password'],
+  validate: validate
 })(Login);
 
 export default connect(mapStateToProps, mapDispatchToProps)(form);

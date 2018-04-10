@@ -12,7 +12,7 @@ passport.use(new LocalStrategy(
     // Verify username and password
     User.findOne({ username: username }, function (err, user) {
       if (err) { return done(err) }
-      if (!user) { return done(null, false) } 
+      if (!user) { return done(null, false, { message: 'Invalid email address or password' }) } 
 
       user.comparePassword(password, function (err, isMatch) {
         if (err) { return done(err) }

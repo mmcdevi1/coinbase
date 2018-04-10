@@ -49,5 +49,8 @@ exports.registration = (req, res, next) => {
 
 // To be used in the User LOGIN POST route in routes/authRoutes.js
 exports.login = (req, res, next) => {
+  if (!req.user) {
+    res.send({error: 'no user'})
+  }
   res.send({ token: sessionsToken(req.user), user: req.user });
 }

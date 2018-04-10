@@ -27,8 +27,8 @@ class Register extends React.Component {
 
     return (
       <div className="form-group">
-        <input className="form-control" type={type} placeholder={label} {...input} />
-        <div>{(touched) ? error : ''}</div>
+        <input className={`form-control ${(touched && error) ? 'form-contol-error' : ''}`} type={type} placeholder={label} {...input} />
+        <div className="error">{(touched) ? error : ''}</div>
       </div>
     )
   }
@@ -49,7 +49,6 @@ class Register extends React.Component {
 
   render () {
     const { handleSubmit } = this.props;
-
     return (
       <Center>
         <BackButton />
