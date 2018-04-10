@@ -94,6 +94,10 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
     /*width:365px;*/
 }
 
+.form-width {
+  width: 500px;
+}
+
 .navbar-header>button {
     padding: 10px 17px;
     font-size: 16px;
@@ -111,6 +115,21 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 /* line 58, /Users/mmcdevi1/Desktop/Apps/ideahack/app/assets/stylesheets/application.scss */
 .btn {
   border-radius: 2px;
+  padding: 14px 12px;
+}
+
+.btn-close {
+  padding: 6px 12px;
+}
+
+.form-header {
+  margin-bottom: 50px;
+}
+
+.go-back a {
+  position: absolute;
+  top: 40px;
+  left: 40px;
 }
 
 /* line 63, /Users/mmcdevi1/Desktop/Apps/ideahack/app/assets/stylesheets/application.scss */
@@ -206,14 +225,23 @@ footer {
 }
 
 /* line 120, /Users/mmcdevi1/Desktop/Apps/ideahack/app/assets/stylesheets/application.scss */
-.form-control {
+.landing-page-form-control {
   border: none;
   background: transparent;
   box-shadow: none;
 }
 
+.form-control {
+  box-shadow: none;
+  border-radius: 2px;
+  border-color: #dbdbdb;
+  height: 50px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
 /* line 125, /Users/mmcdevi1/Desktop/Apps/ideahack/app/assets/stylesheets/application.scss */
-.form-group {
+.landing-page-form-group {
   border-bottom: 4px solid #999;
   margin-bottom: 60px;
 }

@@ -2,28 +2,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-// import createHistory from 'history/createBrowserHistory'
 import { createStore, applyMiddleware } from 'redux';
 import App from './components/App';
-import Register from './components/auth/Register';
-import Login from './components/auth/Login';
-import Logout from './components/auth/Logout';
 import reducers from './reducers';
 import reduxThunk from 'redux-thunk';
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+import axios from 'axios';
+import * as actions from './actions/types';
+import logger from 'redux-logger';
+
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk, logger));
+
+const token = localStorage.getItem('token');
+
+if (token) {
+  fetchUser();  
+}
+
+function fetchUser () {
+  axios.get('http://localhost:5000/api/current_user', {
+    headers: { authorization: localStorage.getItem('token') }
+  })
+    .then(response => {
+      store.dispatch({
+        type: actions.AUTH_USER,
+        payload: response.data
+      })
+    })
+}
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
-        <Route path="/logout" component={Logout} />
-      </Switch>
-    </BrowserRouter>
+    <App />
   </Provider>,
   document.getElementById('root')
 );

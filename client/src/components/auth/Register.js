@@ -1,8 +1,10 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { AUTH_USER, AUTH_ERROR } from '../../actions/types';
+import BackButton from './BackButton';
 
 const FIELDS = [
   { label: 'First Name', name: 'firstName' },
@@ -14,14 +16,17 @@ const FIELDS = [
 ];
 
 class Register extends React.Component {
+  renderLogo () {
+    return process.env.PUBLIC_URL + "/images/DNA-ID-LOGO-white.png";
+  }
+
   renderField (field) {
     // This method is being passed in the component field in the Field Component in the render method
     const { label, type, input, meta: { error, touched } } = field;
 
     return (
-      <div>
-        <label>{label}</label>
-        <input type={type} {...input} />
+      <div className="form-group">
+        <input className="form-control" type={type} placeholder={label} {...input} />
         <div>{(touched) ? error : ''}</div>
       </div>
     )
@@ -46,7 +51,12 @@ class Register extends React.Component {
 
     return (
       <div>
-        <h1>Register page</h1>
+        <BackButton />
+        <div className="form-header center">
+          <img id="logo" src={this.renderLogo()} alt="DNA ID Logo" />
+          <h3>Register</h3>
+          <p>Please complete all fields.</p>
+        </div>
         <form onSubmit={handleSubmit(this.onFormSubmit.bind(this))}>
           {FIELDS.map(field => {
             return (
@@ -60,7 +70,12 @@ class Register extends React.Component {
             )
           })}
           {this.renderAlert()}
-          <button action="submit">Register</button>
+          <div className="form-group">
+            <button className="btn btn-primary btn-block" action="submit">Register</button>
+          </div>
+          <div className="center">
+            Already have an account? <Link to="/login">Login</Link>
+          </div>
         </form>
       </div>
     )

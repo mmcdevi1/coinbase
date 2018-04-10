@@ -14,18 +14,18 @@ class ContactForm extends React.Component {
               <form id="mc-embedded-subscribe-form" action="https://dnaid.us17.list-manage.com/subscribe/post?u=e76ae4b591879e47ffb539873&id=eba8253bcb" method="post" name="mc-embedded-subscribe-form" target="_blank" noValidate className="validate">
                 <div className="row">
                   <div className="col-sm-6">
-                    <div className="form-group">
-                      <input id="mce-FNAME" type="text" name="FNAME" placeholder="First Name" className="form-control" />
+                    <div className="landing-page-form-group form-group">
+                      <input id="mce-FNAME" type="text" name="FNAME" placeholder="First Name" className="landing-page-form-control form-control" />
                     </div>
                   </div>
                   <div className="col-sm-6">
-                    <div className="form-group">
-                      <input id="mce-LNAME" type="text" name="LNAME" placeholder="Last Name" className="form-control" />
+                    <div className="landing-page-form-group form-group">
+                      <input id="mce-LNAME" type="text" name="LNAME" placeholder="Last Name" className="landing-page-form-control form-control" />
                     </div>
                   </div>
                   <div className="col-sm-12">
-                    <div className="form-group">
-                      <input id="mce-EMAIL" type="email" name="EMAIL" placeholder="Email" className="required email form-control" />
+                    <div className="landing-page-form-group form-group">
+                      <input id="mce-EMAIL" type="email" name="EMAIL" placeholder="Email" className="required email landing-page-form-control form-control" />
                     </div>
                   </div>
                 </div>

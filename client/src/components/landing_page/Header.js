@@ -30,8 +30,8 @@ class Header extends React.Component {
       return <li><a onClick={() => this.props.logoutUser()}>{this.props.currentUser.username} Logout</a></li>
     } else {
       return [
-        <li><Link to="/login">Login</Link></li>,
-        <li><Link to="/register">Register</Link></li>
+        <li key="1"><Link to="/login">Login</Link></li>,
+        <li key="12"><Link to="/register">Register</Link></li>
       ]
     }
   }
@@ -46,6 +46,7 @@ class Header extends React.Component {
           <nav className="navbar-collapse bs-navbar-collapse">
             <ul className="nav navbar-nav navbar-right">
               {this.renderLinks()}
+              <li key="3"><Link to="/marketplace">marketplace</Link></li>
               <li><AnchorLink href="#about-us">About Us</AnchorLink></li>
               <li><AnchorLink href="#team">Team</AnchorLink></li>
               <li><AnchorLink href="#contact_form" className="btn btn-success btn-lg">Join In</AnchorLink></li>
