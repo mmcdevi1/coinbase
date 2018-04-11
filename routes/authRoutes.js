@@ -26,4 +26,15 @@ router.get('/api/current_user', authenticateUser, (req, res) => {
   }
 });
 
+// User profile page
+router.get('/api/:username', authenticateUser, (req, res, next) => {
+  User.findOne({username: req.params.username}, (err, user) => {
+    if (err) { res.status(400).send({ message: 'no'}) }
+
+    if (user) {
+      res.send({ user: user })
+    }
+  })
+})
+
 module.exports = router;

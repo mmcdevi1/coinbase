@@ -7,6 +7,7 @@ import Login from './auth/Login';
 import Logout from './auth/Logout';
 import AuthenticateUser from './auth/Authentication';
 import Marketplace from './Marketplace'
+import ProfilePage from './ProfilePage';
 
 class App extends React.Component {
   render () {
@@ -18,6 +19,7 @@ class App extends React.Component {
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />                    
             <Route path="/logout" component={Logout} />
+            <Route path="/:username" component={ProfilePage} />
             <Route path="/marketplace" component={AuthenticateUser(Marketplace)} />
           </Switch>
         </BrowserRouter>
