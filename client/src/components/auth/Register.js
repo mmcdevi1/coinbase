@@ -2,10 +2,9 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { AUTH_USER, AUTH_ERROR } from '../../actions/types';
 import BackButton from './BackButton';
 import Center from './Center';
+import authActions from '../../actions/auth/actions';
 
 const FIELDS = [
   { label: 'First Name', name: 'firstName' },
@@ -15,6 +14,8 @@ const FIELDS = [
   { label: 'Password', name: 'password' },
   { label: 'Password Confirmation', name: 'passwordConfirm' },
 ];
+
+const { registerUser } = authActions;
 
 class Register extends React.Component {
   renderLogo () {
@@ -34,7 +35,9 @@ class Register extends React.Component {
   }
 
   onFormSubmit (formProps) {
-    this.props.registerUser(formProps, this.props.history);
+    const { registerUser, history } = this.props;
+
+    registerUser(formProps, history);
   }
 
   renderAlert () {
@@ -110,32 +113,10 @@ function validate (formProps) {
 }
 
 function mapStateToProps (state) {
-  return {
-    errorMessage: state.auth.error
-  }
-}
+  const { errorMessage } = state.Auth;
 
-function authError (error) {
   return {
-    type: AUTH_ERROR,
-    payload: error
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    registerUser: function ({ firstName, lastName, username, email, password, passwordConfirm }, history) {
-      axios.post('http://localhost:5000/register', { firstName, lastName, username, email, password, passwordConfirm })
-        .then(response => {
-          console.log(response)
-          dispatch({ type: AUTH_USER, payload: response.data.user })
-          localStorage.setItem('token', response.data.token)
-
-          // Redirect
-          history.push('/')
-        })
-        .catch(e => dispatch(authError(e.response.data.error)))
-    }
+    errorMessage
   }
 }
 
@@ -145,4 +126,4 @@ const form = reduxForm({
   validate: validate,
 })(Register)
 
-export default connect(mapStateToProps, mapDispatchToProps)(form)
+export default connect(mapStateToProps, { registerUser })(form)

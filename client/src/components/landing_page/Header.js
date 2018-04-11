@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import { connect } from 'react-redux';
-import { UNAUTH_USER } from '../../actions/types';
+import authActions from '../../actions/auth/actions';
+
+const { logoutUser } = authActions;
 
 class Header extends React.Component {
   renderLogo () {
@@ -26,8 +28,10 @@ class Header extends React.Component {
   }
 
   renderLinks () {
-    if (this.props.auth) {
-      return <li><a onClick={() => this.props.logoutUser()}>{this.props.currentUser.username} Logout</a></li>
+    const { authenticated, logoutUser, currentUser } = this.props;
+
+    if (authenticated) {
+      return <li><a onClick={() => logoutUser()}>{currentUser.username} Logout</a></li>
     } else {
       return [
         <li key="1"><Link to="/login">Login</Link></li>,
@@ -37,11 +41,13 @@ class Header extends React.Component {
   }
 
   render () {
+    const { background, logoHeight } = this.state;
+
     return (
-      <header style={{backgroundColor: this.state.background}} id="top" role="banner" className="navbar navbar-fixed-top bs-docs-nav">
+      <header style={{backgroundColor: background}} id="top" role="banner" className="navbar navbar-fixed-top bs-docs-nav">
         <div className="container-fluid">
           <div className="navbar-header">
-            <img id="logo" src={this.renderLogo()} alt="DNA ID Logo" height={this.state.logoHeight} />
+            <img id="logo" src={this.renderLogo()} alt="DNA ID Logo" height={logoHeight} />
           </div>
           <nav className="navbar-collapse bs-navbar-collapse">
             <ul className="nav navbar-nav navbar-right">
@@ -59,22 +65,12 @@ class Header extends React.Component {
 }
 
 function mapStateToProps (state) {
+  const { authenticated, currentUser } = state.Auth;
+
   return {
-    auth: state.auth.authenticated,
-    currentUser: state.auth.currentUser
+    authenticated,
+    currentUser
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    logoutUser: function () {
-      localStorage.removeItem('token');
-
-      dispatch({
-        type: UNAUTH_USER
-      })
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, { logoutUser })(Header);

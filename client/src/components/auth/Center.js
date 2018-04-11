@@ -1,7 +1,4 @@
 import React from 'react';
-import Register from './Register';
-import Login from './Login';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 class Center extends React.Component {
   render () {

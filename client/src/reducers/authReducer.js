@@ -1,26 +1,28 @@
-import * as userConstants from '../actions/types';
+import authActions from '../actions/auth/actions';
+
+const { AUTH_USER, UNAUTH_USER, AUTH_ERROR } = authActions;
 
 const initialState = {
-  error: '',
+  errorMessage: '',
   authenticated: localStorage.getItem('token') ? true : false,
   currentUser: {}
 }
 
 const authReducer = (state=initialState, action) => {
   switch (action.type) {
-    case userConstants.AUTH_USER:
+    case AUTH_USER:
       return { 
         ...state, 
-        error: '', 
+        errorMessage: '', 
         authenticated: true, 
         currentUser: action.payload 
       };
-    case userConstants.AUTH_ERROR:
+    case AUTH_ERROR:
       return { 
         ...state, 
-        error: action.payload 
+        errorMessage: action.payload 
       };
-    case userConstants.UNAUTH_USER:
+    case UNAUTH_USER:
       return { 
         ...state, 
         authenticated: false,

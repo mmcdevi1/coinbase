@@ -1,17 +1,19 @@
 import React from 'react';
-import axios from 'axios';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as types from '../../actions/types';
-import * as actions from '../../actions';
 import BackButton from './BackButton';
 import Center from './Center';
+import authActions from '../../actions/auth/actions';
+
+const { signinUser } = authActions;
 
 class Login extends React.Component {
   componentWillMount () {
-    if (this.props.authenticated) {
-      this.props.history.push('/')
+    const { authenticated, history } = this.props;
+
+    if (authenticated) {
+      history.push('/')
     }
   }
 
@@ -20,12 +22,13 @@ class Login extends React.Component {
   }
 
   onFormSubmit ({ username, password }) {
-    console.log(this.props)
-    this.props.signinUser({ username, password }, this.props.history)
+    const { signinUser, history } = this.props;
+
+    signinUser({ username, password }, history)
   }
 
   renderField (field) {
-    const { label, type, input, meta: { error, touched } } = field;
+    const { input, meta: { error, touched } } = field;
 
     return (
       <div className="form-group">
@@ -38,10 +41,12 @@ class Login extends React.Component {
   }
 
   renderAlert () {
-    if (this.props.errorMessage) {
+    const { errorMessage } = this.props;
+
+    if (errorMessage) {
       return (
         <div className="alert alert-danger">
-          {this.props.errorMessage}
+          {errorMessage}
         </div>
       )
     }
@@ -92,34 +97,12 @@ function validate (formProps) {
 }
 
 function mapStateToProps (state) {
+  const { authenticated, errorMessage, currentUser } = state.Auth; 
+  
   return {
-    authenticated: state.auth.authenticated,
-    errorMessage: state.auth.error,
-    currentUser: state.auth.currentUser
-  }
-}
-
-function authError (error) {
-  return {
-    type: types.AUTH_ERROR,
-    payload: error
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    signinUser: function ({ username, password }, history) {
-      axios.post('http://localhost:5000/login', { username, password })
-        .then(response => {
-          console.log(response)
-          dispatch({ type: types.AUTH_USER, payload: response.data.user })
-          localStorage.setItem('token', response.data.token)
-
-          // Redirect
-          history.push('/')
-        })
-        .catch(e => dispatch(authError('Invalid email or password. Please try again')))
-    }
+    authenticated,
+    errorMessage,
+    currentUser
   }
 }
 
@@ -129,4 +112,4 @@ const form = reduxForm({
   validate: validate
 })(Login);
 
-export default connect(mapStateToProps, mapDispatchToProps)(form);
+export default connect(mapStateToProps, { signinUser })(form);
