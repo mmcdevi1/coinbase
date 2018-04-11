@@ -18,9 +18,9 @@ class App extends React.Component {
             <Route exact path="/" component={LandingPage} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />                    
-            <Route path="/logout" component={Logout} />
-            <Route path="/:username" component={ProfilePage} />
+            <Route path="/logout" component={Logout} />            
             <Route path="/marketplace" component={AuthenticateUser(Marketplace)} />
+            <Route path="/:username" component={AuthenticateUser(ProfilePage)} />
           </Switch>
         </BrowserRouter>
       </div>
