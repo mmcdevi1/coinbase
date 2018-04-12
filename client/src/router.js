@@ -8,6 +8,7 @@ import AuthenticateUser from './components/auth/Authentication';
 import Marketplace from './components/Marketplace'
 import ProfilePage from './components/ProfilePage';
 import Dashboard from './components/Dashboard';
+import WizardForm from './components/wizard';
 
 const PublicRoutes = () => {
   return (
@@ -16,7 +17,8 @@ const PublicRoutes = () => {
         <Route exact path="/" component={LandingPage} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />                    
-        <Route path="/logout" component={Logout} />            
+        <Route path="/logout" component={Logout} />  
+        <Route path="/kit/request" component={AuthenticateUser(WizardForm)} />          
         <Route path="/marketplace" component={AuthenticateUser(Marketplace)} />
         <Route path="/dashboard" component={AuthenticateUser(Dashboard)} />
         <Route path="/:username" component={AuthenticateUser(ProfilePage)} />

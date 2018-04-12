@@ -49,6 +49,7 @@ class Register extends React.Component {
 
   render () {
     const { handleSubmit } = this.props;
+
     return (
       <Center>
         <BackButton />

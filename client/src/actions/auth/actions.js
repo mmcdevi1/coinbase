@@ -50,7 +50,7 @@ const authActions = {
         localStorage.setItem('token', res.data.token)
 
         // Redirect
-        history.push('/')
+        history.push('/kit/request')
       })
       .catch(e => dispatch(authActions.authError(e.res.data.error)))
     }

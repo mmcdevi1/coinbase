@@ -7,6 +7,7 @@ const cors = require('cors');
 
 // Require Models
 require('./models/User'); // USER MODEL
+require('./models/Order'); // ORDER MODEL
 
 // Require Routes
 const authRoutes = require('./routes/authRoutes');
