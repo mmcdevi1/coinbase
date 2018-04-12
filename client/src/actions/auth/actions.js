@@ -4,6 +4,7 @@ const authActions = {
   AUTH_USER: 'AUTH_USER',
   UNAUTH_USER: 'UNAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
+  UPDATE_USER: 'UPDATE_USER',
 
   authError: (error) => {
     return {
@@ -14,7 +15,7 @@ const authActions = {
 
   signinUser: ({ username, password }, history) => {
     return (dispatch) => {
-      axios.post('http://localhost:5000/login', { username, password })
+      axios.post('/api/login', { username, password })
       .then(res => {
         dispatch({ 
           type: authActions.AUTH_USER, 
@@ -24,7 +25,7 @@ const authActions = {
         localStorage.setItem('token', res.data.token);
 
         // Redirect
-        history.push('/')
+        history.push('/dashboard')
       })
       .catch(e => dispatch(authActions.authError('Invalid email or password. Please try again')))
     }
@@ -42,7 +43,7 @@ const authActions = {
 
   registerUser: function ({ firstName, lastName, username, email, password, passwordConfirm }, history) {
     return (dispatch) => {
-      axios.post('http://localhost:5000/register', { firstName, lastName, username, email, password, passwordConfirm })
+      axios.post('/api/register', { firstName, lastName, username, email, password, passwordConfirm })
       .then(res => {
         console.log(res)
         dispatch({ type: authActions.AUTH_USER, payload: res.data.user })
@@ -53,7 +54,22 @@ const authActions = {
       })
       .catch(e => dispatch(authActions.authError(e.res.data.error)))
     }
-  }
+  },
+
+  updateUser: function (body) {
+    return (dispatch) => {
+      axios.put('/api/update_current_user', body, {
+        headers: { authorization: localStorage.getItem('token') }
+      })
+      .then(res => {
+        dispatch({
+          type: authActions.UPDATE_USER,
+          payload: res.data.user
+        })
+      })
+    }
+  }      
+
 }
 
 export default authActions;

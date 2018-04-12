@@ -4,7 +4,6 @@ import reduxThunk from 'redux-thunk';
 import reducerList from './reducers';
 
 const middlewares = [reduxThunk, logger];
-
 const reducers = combineReducers({
   ...reducerList
 })

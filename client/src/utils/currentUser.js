@@ -1,5 +1,5 @@
 import axios from 'axios';
-import authActions from '../actions/auth/actions';
+import authActions from '../actions/auth';
 import store from '../reducers/store';
 
 const { AUTH_USER } = authActions;
@@ -11,7 +11,7 @@ if (token) {
 }
 
 function fetchUser () {
-  axios.get('http://localhost:5000/api/current_user', {
+  axios.get('/api/current_user', {
     headers: { authorization: localStorage.getItem('token') }
   })
     .then(response => {

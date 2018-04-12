@@ -1,6 +1,6 @@
-import authActions from '../actions/auth/actions';
+import authActions from '../actions/auth';
 
-const { AUTH_USER, UNAUTH_USER, AUTH_ERROR } = authActions;
+const { AUTH_USER, UNAUTH_USER, AUTH_ERROR, UPDATE_USER } = authActions;
 
 const initialState = {
   errorMessage: '',
@@ -28,6 +28,11 @@ const authReducer = (state=initialState, action) => {
         authenticated: false,
         currentUser: {} 
       };
+    case UPDATE_USER:
+      return {
+        ...state,
+        currentUser: action.payload
+      }
     default:
       return state;
   }

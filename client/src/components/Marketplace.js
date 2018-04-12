@@ -14,11 +14,13 @@ class Marketplace extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
-  return {
-    auth: state.auth.authenticated,
-    currentUser: state.auth.currentUser
-  }
-}
+// function mapStateToProps (state) {
+//   const { authenticated, currentUser } = this.Auth;
 
-export default connect(mapStateToProps)(Marketplace);
+//   return {
+//     auth: state.auth.authenticated,
+//     currentUser: state.auth.currentUser
+//   }
+// }
+
+export default connect(null)(Marketplace);

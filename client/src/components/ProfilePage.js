@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import * as userConstants from '../actions/types';
+import userActions from '../actions/user';
+
+const { getUser } = userActions;
 
 class ProfilePage extends React.Component {
   componentDidMount () {
@@ -23,29 +25,9 @@ class ProfilePage extends React.Component {
 }
 
 function mapStateToProps (state) {
-  const { user } = state;
   return {
-    user,
+    user: state.User
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  const arr = window.location.href.split('/');
-  const params = arr[arr.length - 1];
-
-  return {
-    getUser: function () {
-      axios.get(`http://localhost:5000/api/${params}`, {
-        headers: { authorization: localStorage.getItem('token') }
-      })
-      .then(res => {
-        dispatch({
-          type: userConstants.GET_USERS,
-          payload: res.data.user
-        })
-      })
-    }
-  }  
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
+export default connect(mapStateToProps, { getUser })(ProfilePage);

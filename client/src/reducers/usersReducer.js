@@ -1,12 +1,10 @@
-import * as userConstants from '../actions/types';
+import userActions from '../actions/user';
 
-const initialState = {
+const { GET_USERS } = userActions;
 
-}
-
-const userReducer = (state=initialState, action) => {
+const userReducer = (state={}, action) => {
   switch (action.type) {
-    case userConstants.GET_USERS:
+    case GET_USERS:
       return action.payload;
     default:
       return state;

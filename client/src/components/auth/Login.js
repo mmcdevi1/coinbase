@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import BackButton from './BackButton';
 import Center from './Center';
-import authActions from '../../actions/auth/actions';
+import authActions from '../../actions/auth';
 
 const { signinUser } = authActions;
 
@@ -15,10 +15,6 @@ class Login extends React.Component {
     if (authenticated) {
       history.push('/')
     }
-  }
-
-  renderLogo () {
-    return process.env.PUBLIC_URL + "/images/DNA-ID-LOGO-white.png";
   }
 
   onFormSubmit ({ username, password }) {
@@ -98,7 +94,7 @@ function validate (formProps) {
 
 function mapStateToProps (state) {
   const { authenticated, errorMessage, currentUser } = state.Auth; 
-  
+
   return {
     authenticated,
     errorMessage,

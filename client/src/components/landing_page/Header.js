@@ -2,15 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import { connect } from 'react-redux';
-import authActions from '../../actions/auth/actions';
+import authActions from '../../actions/auth';
+import Logo from '../utilities/logo';
 
 const { logoutUser } = authActions;
 
 class Header extends React.Component {
-  renderLogo () {
-    return process.env.PUBLIC_URL + "/images/DNA-ID-LOGO-white.png";
-  }
-
   state = {
     background: '',
     logoHeight: 75
@@ -27,15 +24,25 @@ class Header extends React.Component {
     });
   }
 
+  renderAdminLinks () {
+    const { currentUser } = this.props;
+
+    if (currentUser.admin) {
+      return [
+        <li key="1"><a onClick={() => logoutUser()}>Admin</a></li>
+      ]
+    } 
+  }
+
   renderLinks () {
     const { authenticated, logoutUser, currentUser } = this.props;
 
     if (authenticated) {
-      return <li><a onClick={() => logoutUser()}>{currentUser.username} Logout</a></li>
+      return <li><a onClick={() => logoutUser()}>{currentUser.username} Logout</a></li>;
     } else {
       return [
         <li key="1"><Link to="/login">Login</Link></li>,
-        <li key="12"><Link to="/register">Register</Link></li>
+        <li key="2"><Link to="/register">Register</Link></li>
       ]
     }
   }
@@ -47,10 +54,11 @@ class Header extends React.Component {
       <header style={{backgroundColor: background}} id="top" role="banner" className="navbar navbar-fixed-top bs-docs-nav">
         <div className="container-fluid">
           <div className="navbar-header">
-            <img id="logo" src={this.renderLogo()} alt="DNA ID Logo" height={logoHeight} />
+            <Logo height={logoHeight} />
           </div>
           <nav className="navbar-collapse bs-navbar-collapse">
             <ul className="nav navbar-nav navbar-right">
+              {this.renderAdminLinks()}
               {this.renderLinks()}
               <li key="3"><Link to="/marketplace">marketplace</Link></li>
               <li><AnchorLink href="#about-us">About Us</AnchorLink></li>

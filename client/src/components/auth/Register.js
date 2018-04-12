@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import BackButton from './BackButton';
 import Center from './Center';
-import authActions from '../../actions/auth/actions';
+import authActions from '../../actions/auth';
+import Logo from '../utilities/logo';
 
 const FIELDS = [
   { label: 'First Name', name: 'firstName' },
@@ -18,10 +19,6 @@ const FIELDS = [
 const { registerUser } = authActions;
 
 class Register extends React.Component {
-  renderLogo () {
-    return process.env.PUBLIC_URL + "/images/DNA-ID-LOGO-white.png";
-  }
-
   renderField (field) {
     // This method is being passed in the component field in the Field Component in the render method
     const { label, type, input, meta: { error, touched } } = field;
@@ -56,7 +53,7 @@ class Register extends React.Component {
       <Center>
         <BackButton />
         <div className="form-header center">
-          <img id="logo" src={this.renderLogo()} alt="DNA ID Logo" />
+          <Logo />
           <h3>Register</h3>
           <p>Please complete all fields.</p>
         </div>
