@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt-nodejs');
 // Require User Model
 const User = require('../models/User');
 
-// Const 
+// Const
 const requireLogin     = passport.authenticate('local', { session: false });
 const authenticateUser = passport.authenticate('jwt', { session: false }); // To protect pages
 
@@ -37,8 +37,8 @@ router.put('/api/update_current_user', authenticateUser, (req, res) => {
   }
 
   User.findByIdAndUpdate(user.id, params, {new: true}, (err, user) => {
-    if (err) { return res.status(500).send({ err: 'This username already exists!' }) } 
-    
+    if (err) { return res.status(500).send({ err: 'This username already exists!' }) }
+
     res.send({user: user, message: 'User updated'})
   })
 });
@@ -46,17 +46,17 @@ router.put('/api/update_current_user', authenticateUser, (req, res) => {
 // Update user password
 router.put('/api/update_password', authenticateUser, (req, res, next) => {
   const user = req.user;
-  const password = req.body.password;  
+  const password = req.body.password;
 
   bcrypt.hash(password, null, null, function (err, hash) {
     if (err) { return next(err) }
-    
+
     User.findByIdAndUpdate(user.id, {...req.body, password: hash}, {new: true}, (err, user) => {
-      if (err) { return res.status(500).send({ err: 'Error!' }) } 
-  
+      if (err) { return res.status(500).send({ err: 'Error!' }) }
+
       res.send({user: user, message: 'Password updated'})
     });
-  })  
+  })
 })
 
 // User profile page

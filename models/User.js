@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
   },
   email:       { type: String, unique: true, lowercase: true },
   username:    { type: String, unique: true },
-  password:    String,  
+  password:    String,
   admin:       { type: Boolean, default: false },
   researcher:  { type: Boolean, default: false },
   contributor: { type: Boolean, default: false },
@@ -40,6 +40,9 @@ UserSchema.pre('save', function (next) {
 });
 
 // User Model Methods
+UserSchema.methods.orders = function () {
+
+}
 
 // Compare user input password on login to the encrypted password
 UserSchema.methods.comparePassword = function (password, callback) {

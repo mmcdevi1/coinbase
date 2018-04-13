@@ -12,10 +12,12 @@ const OrderSchema = new mongoose.Schema({
   orderStatus: String,
   subTotal:    Number,
   ccName:      String,
-  ccNumber:    String
+  ccNumber:    String,
   expiryMo:    String,
   expiryYr:    String,
   ccCvv:       String,
   createdAt:   Date,
   updatedAt:   Date,
 });
+
+module.exports = mongoose.model('Order', OrderSchema);

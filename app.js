@@ -11,6 +11,7 @@ require('./models/Order'); // ORDER MODEL
 
 // Require Routes
 const authRoutes = require('./routes/authRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 // Connect MongoDB with mLab.com in Development
 mongoose.connect(keys.mongoURI);
@@ -24,7 +25,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // Use Routes
+app.use(orderRoutes);
 app.use(authRoutes);
+
 
 // Listen on port 5000 in Development
 const PORT = process.env.PORT || 5000;
