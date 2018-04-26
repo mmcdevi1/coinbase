@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import MainContent from './MainContent';
 import AboutUs from './AboutUs';
+import HowItWorks from './HowItWorks';
 import Team from './Team';
 import ContactForm from './ContactForm';
 import Footer from './Footer';
@@ -14,6 +15,7 @@ class LandingPage extends React.Component {
           <Header />
           <MainContent />
         </div>
+        <HowItWorks />
         <AboutUs />
         <Team />
         <ContactForm />
