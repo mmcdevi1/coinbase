@@ -55,7 +55,7 @@ router.put('/api/update_password', authenticateUser, (req, res, next) => {
   bcrypt.hash(password, null, null, function (err, hash) {
     if (err) { return next(err) }
 
-    User.findByIdAndUpdate(user.id, {...req.body, password: hash}, {new: true}, (err, user) => {
+    User.findByIdAndUpdate(user.id, Object.assign({}, req.body, { password: hash }), {new: true}, (err, user) => {
       if (err) { return res.status(500).send({ err: 'Error!' }) }
 
       res.send({user: user, message: 'Password updated'})
