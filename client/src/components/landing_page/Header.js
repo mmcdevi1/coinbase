@@ -54,7 +54,7 @@ class Header extends React.Component {
 
   render () {
     const { background, logoHeight } = this.state;
-    console.log(process.env.NODE_ENV)
+
     return (
       <header style={{backgroundColor: background}} id="top" role="banner" className="navbar navbar-fixed-top bs-docs-nav">
         <div className="container-fluid">

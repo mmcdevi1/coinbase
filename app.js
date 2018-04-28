@@ -31,6 +31,6 @@ app.use(authRoutes);
 
 // Listen on port 5000 in Development
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log(`Listening on port ${PORT}`);
 });
