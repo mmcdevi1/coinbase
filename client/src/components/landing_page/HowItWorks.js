@@ -51,7 +51,7 @@ class Team extends React.Component {
 
   render () {
     return (
-      <section id="team" style={{padding: '50px 0'}} className="notable-members">
+      <section id="how-it-works" style={{padding: '50px 0'}} className="notable-members">
         <div className="container">
           <div className="center">
             <div className="row">
