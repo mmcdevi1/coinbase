@@ -31,10 +31,14 @@ router.get('/api/current_user', authenticateUser, (req, res) => {
 router.put('/api/update_current_user', authenticateUser, (req, res) => {
   const user = req.user;
 
-  const params = {
-    ...req.body,
+  // const params = {
+  //   ...req.body,
+  //   updatedAt: Date.now()
+  // }
+
+  const params = Object.assign({}, req.body, {
     updatedAt: Date.now()
-  }
+  })
 
   User.findByIdAndUpdate(user.id, params, {new: true}, (err, user) => {
     if (err) { return res.status(500).send({ err: 'This username already exists!' }) }
