@@ -5,7 +5,7 @@ const TEAM_MEMBERS = [
     id: 1,
     name: 'Craig Calderone',
     linkedin: 'https://www.linkedin.com/in/craigcalderone/',
-    bio: "Craig is a co-founder that comes from a background in the tech startup industry. Having worked at NASDAQ, Techstars and Leanplum, he is driving product vision. He holds a degree in Economics from Villanova University.",
+    bio: "Craig is a co-founder that comes from a background in big data. Having worked at NASDAQ, Techstars, Chartbeat and Leanplum, he is driving product vision. He holds a degree in Economics from Villanova University.",
     img: `${process.env.PUBLIC_URL}/images/craig.jpg`
   },
   {

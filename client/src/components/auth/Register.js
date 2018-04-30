@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import BackButton from './BackButton';
 import Center from './Center';
 import authActions from '../../actions/auth';
-import Logo from '../utilities/logo';
+import Logo from '../utilities/logo-black';
 
 const FIELDS = [
   { label: 'First Name', name: 'firstName' },
@@ -54,7 +54,7 @@ class Register extends React.Component {
       <Center>
         <BackButton />
         <div className="form-header center">
-          <Logo />
+          <Logo-black />
           <h3>Register</h3>
           <p>Please complete all fields.</p>
         </div>

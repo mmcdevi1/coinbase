@@ -61,6 +61,7 @@ class Header extends React.Component {
               {this.renderAdminLinks()}
               {this.renderLinks()}
               <li key="3"><Link to="/marketplace">marketplace</Link></li>
+              <li><AnchorLink href="#how-it-works">How it Works</AnchorLink></li>
               <li><AnchorLink href="#about-us">About Us</AnchorLink></li>
               <li><AnchorLink href="#team">Team</AnchorLink></li>
               <li><AnchorLink href="#contact_form" className="btn btn-success btn-lg">Join In</AnchorLink></li>
