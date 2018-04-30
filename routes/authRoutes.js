@@ -31,10 +31,14 @@ router.get('/api/current_user', authenticateUser, (req, res) => {
 router.put('/api/update_current_user', authenticateUser, (req, res) => {
   const user = req.user;
 
-  const params = {
-    ...req.body,
+  // const params = {
+  //   ...req.body,
+  //   updatedAt: Date.now()
+  // }
+
+  const params = Object.assign({}, req.body, {
     updatedAt: Date.now()
-  }
+  })
 
   User.findByIdAndUpdate(user.id, params, {new: true}, (err, user) => {
     if (err) { return res.status(500).send({ err: 'This username already exists!' }) }
@@ -51,7 +55,7 @@ router.put('/api/update_password', authenticateUser, (req, res, next) => {
   bcrypt.hash(password, null, null, function (err, hash) {
     if (err) { return next(err) }
 
-    User.findByIdAndUpdate(user.id, {...req.body, password: hash}, {new: true}, (err, user) => {
+    User.findByIdAndUpdate(user.id, Object.assign({}, req.body, { password: hash }), {new: true}, (err, user) => {
       if (err) { return res.status(500).send({ err: 'Error!' }) }
 
       res.send({user: user, message: 'Password updated'})

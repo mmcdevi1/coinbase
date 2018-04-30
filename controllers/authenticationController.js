@@ -54,3 +54,4 @@ exports.login = (req, res, next) => {
   }
   res.send({ token: sessionsToken(req.user), user: req.user });
 }
+

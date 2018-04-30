@@ -10,7 +10,8 @@ const { logoutUser } = authActions;
 class Header extends React.Component {
   state = {
     background: '',
-    logoHeight: 75
+    logoHeight: 75,
+
   };
 
   componentDidMount () {
@@ -37,14 +38,18 @@ class Header extends React.Component {
   renderLinks () {
     const { authenticated, logoutUser, currentUser } = this.props;
 
-    if (authenticated) {
-      return <li><a onClick={() => logoutUser()}>{currentUser.username} Logout</a></li>;
-    } else {
-      return [
-        <li key="1"><Link to="/login">Login</Link></li>,
-        <li key="2"><Link to="/register">Register</Link></li>
-      ]
+    if (process.env.NODE_ENV === 'development') {
+      if (authenticated) {
+        return <li><a onClick={() => logoutUser()}>{currentUser.username} Logout</a></li>;
+      } else {
+        return [
+          <li key="1"><Link to="/login">Login</Link></li>,
+          <li key="2"><Link to="/register">Register</Link></li>,
+          <li key="3"><Link to="/marketplace">marketplace</Link></li>
+        ]
+      }      
     }
+
   }
 
   render () {
