@@ -65,7 +65,6 @@ class Header extends React.Component {
             <ul className="nav navbar-nav navbar-right">
               {this.renderAdminLinks()}
               {this.renderLinks()}
-              <li key="3"><Link to="/marketplace">marketplace</Link></li>
               <li><AnchorLink href="#how-it-works">How it Works</AnchorLink></li>
               <li><AnchorLink href="#about-us">About Us</AnchorLink></li>
               <li><AnchorLink href="#team">Team</AnchorLink></li>
