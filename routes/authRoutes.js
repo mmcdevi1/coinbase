@@ -13,13 +13,13 @@ const requireLogin     = passport.authenticate('local', { session: false });
 const authenticateUser = passport.authenticate('jwt', { session: false }); // To protect pages
 
 // User registration POST route
-router.post('/api/register', Authentication.registration);
+router.post('/register', Authentication.registration);
 
 // User Login POST route
-router.post('/api/login', requireLogin, Authentication.login);
+router.post('/login', requireLogin, Authentication.login);
 
 // Current user API
-router.get('/api/current_user', authenticateUser, (req, res) => {
+router.get('/current_user', authenticateUser, (req, res) => {
   if (req.user) {
     res.send(req.user)
   } else {
@@ -28,7 +28,7 @@ router.get('/api/current_user', authenticateUser, (req, res) => {
 });
 
 // Update current user basic info
-router.put('/api/update_current_user', authenticateUser, (req, res) => {
+router.put('/update_current_user', authenticateUser, (req, res) => {
   const user = req.user;
 
   // const params = {
@@ -48,7 +48,7 @@ router.put('/api/update_current_user', authenticateUser, (req, res) => {
 });
 
 // Update user password
-router.put('/api/update_password', authenticateUser, (req, res, next) => {
+router.put('/update_password', authenticateUser, (req, res, next) => {
   const user = req.user;
   const password = req.body.password;
 
@@ -65,7 +65,7 @@ router.put('/api/update_password', authenticateUser, (req, res, next) => {
 
 // User profile page
 // IMPORTANT: MUST BE LAST
-router.get('/api/:username', authenticateUser, (req, res, next) => {
+router.get('/:username', authenticateUser, (req, res, next) => {
   User.findOne({username: req.params.username}, (err, user) => {
     if (err) { res.status(400).send({ message: 'no'}) }
 

@@ -31,7 +31,10 @@
     "passport-google-oauth20": "^1.0.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
     "pug": "^2.0.0-rc.4",
+    "sequelize": "^4.37.7",
     "smoothscroll": "^0.4.0"
   },
   "devDependencies": {
