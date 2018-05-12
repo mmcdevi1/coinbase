@@ -8,6 +8,8 @@ const cors = require('cors');
 // Require Models
 require('./models/User'); // USER MODEL
 require('./models/Order'); // ORDER MODEL
+require('./models/Cart'); // CART MODEL
+require('./models/CartItem'); // CART ITEM MODEL
 
 // Require Routes
 const authRoutes = require('./routes/authRoutes');
