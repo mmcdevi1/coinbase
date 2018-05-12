@@ -14,6 +14,7 @@ require('./models/CartItem'); // CART ITEM MODEL
 // Require Routes
 const authRoutes = require('./routes/authRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 
 // Connect MongoDB with mLab.com in Development
 mongoose.connect(keys.mongoURI);
@@ -29,6 +30,7 @@ app.use(cors());
 // Use Routes
 app.use(orderRoutes);
 app.use(authRoutes);
+app.use(cartRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets

@@ -1,8 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import CartItem from '../components/cart/CartItem';
 
 class Cart extends React.Component {
+	componentDidMount () {
+		if (!localStorage.getItem('cart')) {
+			axios.post('/api/cart/new', { _user: 1 }, {
+	      headers: { authorization: localStorage.getItem('token') }
+	    })
+				.then(res => {
+					console.log(res.data.cart._id)
+					localStorage.setItem('cart', res.data.cart._id)
+				})
+				.catch(err => {
+					console.log(err)
+				})
+		} else {
+			axios.get('/api/cart', { _id: localStorage.getItem('cart') }, {
+	      headers: { authorization: localStorage.getItem('token') }
+	    })
+	    	.then(res => {
+	    		console.log(res.data)
+	    	})
+		}
+
+	}
+
 	renderCartItems () {
 		const { cart, products } = this.props
 

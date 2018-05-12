@@ -21,7 +21,7 @@ const PublicRoutes = () => {
         <Route path="/login"       component={Login} />                    
         <Route path="/logout"      component={Logout} />  
         <Route path="/kit"         component={Product} />
-        <Route path="/cart"        component={Cart} />
+        <Route path="/cart"        component={AuthenticateUser(Cart)} />
         <Route path="/kit/request" component={AuthenticateUser(WizardForm)} />
         <Route path="/marketplace" component={AuthenticateUser(Marketplace)} />
         <Route path="/dashboard"   component={AuthenticateUser(Dashboard)} />
