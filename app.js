@@ -5,11 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // Require Models
-const User = require('./models/User'); // USER MODEL
-require('./models/Order'); // ORDER MODEL
-require('./models/Cart'); // CART MODEL
-require('./models/CartItem'); // CART ITEM MODEL
-const db = require('./db')
+const { db } = require('./models');
 
 // Require Routes
 const authRoutes = require('./routes/authRoutes');
@@ -42,18 +38,42 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-db.authenticate().then(() => {
-  console.log('[CONNECTION]: Connection to database succeeded.')
-})
+db
+  .sync()
+  .then(() => {
+    console.log('[CONNECTION]: Connection to database succeeded.')
 
-// Listen on port 5000 in Development
-// const PORT = process.env.PORT || 5000;
-const init = async () => {
-  await User.sync();
+    app.listen(process.env.PORT || 5000, function(){
+      console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+    });
+  })
 
-  app.listen(process.env.PORT || 5000, function(){
-    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-  });
-}
 
-init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

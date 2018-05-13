@@ -2,6 +2,7 @@ const db = require('../db');
 const Sequelize = require('sequelize');
 const bluebird = require("bluebird");
 const bcrypt = bluebird.promisifyAll(require('bcrypt-nodejs'));
+const Cart = require('./Cart')
 
 const User = db.define('user', {
   firstName: { 
@@ -93,5 +94,7 @@ User.prototype.comparePassword = function (password, callback) {
     callback(null, res);
   })
 }
+
+// User.hasMany(Cart)
 
 module.exports = User;

@@ -1,8 +1,10 @@
-const mongoose = require('mongoose');
+const db = require('../db');
+const Sequelize = require('sequelize');
+const User = require('./User')
 
 // Order Schema Setup
-const CartSchema = new mongoose.Schema({
-  _user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+const Cart = db.define('cart', {
+
 });
 
-module.exports = mongoose.model('Cart', CartSchema);
+module.exports = Cart;
