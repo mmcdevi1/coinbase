@@ -23,17 +23,17 @@ exports.update = (req, res) => {
 // UPDATE TO USE SEQUELIZE ****************
 exports.updatePassword = (req, res, next) => {
   const user = req.user;
-  const password = req.body.password;
+  const { password } = req.body;
 
-  bcrypt.hash(password, null, null, function (err, hash) {
-    if (err) { return next(err) }
+  // bcrypt.hash(password, null, null, function (err, hash) {
+  //   if (err) { return next(err) }
 
-    User.findByIdAndUpdate(user.id, Object.assign({}, req.body, { password: hash }), {new: true}, (err, user) => {
-      if (err) { return res.status(500).send({ err: 'Error!' }) }
+  //   User.findByIdAndUpdate(user.id, Object.assign({}, req.body, { password: hash }), {new: true}, (err, user) => {
+  //     if (err) { return res.status(500).send({ err: 'Error!' }) }
 
-      res.send({user: user, message: 'Password updated'})
-    });
-  })
+  //     res.send({user: user, message: 'Password updated'})
+  //   });
+  // })
 }
 
 exports.show = (req, res, next) => {
