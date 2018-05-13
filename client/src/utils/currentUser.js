@@ -7,6 +7,7 @@ const { AUTH_USER } = authActions;
 const token = localStorage.getItem('token');
 
 if (token) {
+  console.log('token exists')
   fetchUser();  
 }
 
@@ -15,10 +16,14 @@ function fetchUser () {
     headers: { authorization: localStorage.getItem('token') }
   })
     .then(response => {
+      console.log(response)
       store.dispatch({
         type: AUTH_USER,
         payload: response.data
       })
+    })
+    .catch(err => {
+      console.log(err)
     })
 }
 

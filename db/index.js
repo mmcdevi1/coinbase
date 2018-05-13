@@ -2,4 +2,4 @@
 
 const Sequelize = require('sequelize');
 
-module.exports = new Sequelize('postgres://localhost:5000/dnaid')
+module.exports = new Sequelize('postgres://localhost/dnaid')

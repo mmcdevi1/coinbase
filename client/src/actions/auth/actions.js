@@ -17,6 +17,7 @@ const authActions = {
     return (dispatch) => {
       axios.post('/api/login', { username, password })
       .then(res => {
+        console.log(res)
         dispatch({ 
           type: authActions.AUTH_USER, 
           payload: res.data.user 
@@ -52,7 +53,7 @@ const authActions = {
         // Redirect
         history.push('/kit/request')
       })
-      .catch(e => dispatch(authActions.authError(e.res.data.error)))
+      .catch( e => dispatch( authActions.authError( 'Error: This user already exists!' ) ) )
     }
   },
 

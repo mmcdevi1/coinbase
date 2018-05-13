@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jwt-simple');
 const keys = require('../config/keys');
+const Sequelize = require('sequelize')
 
 function sessionsToken (user) {
   const timestamp = new Date().getTime();
@@ -13,26 +14,18 @@ exports.registration = (req, res, next) => {
   const { firstName, lastName, email, password, username, researcher, contributor } = req.body;
 
   // // Require email, password and username
-  // if (!email || !password || !username) {
-  //   return res.status(422).send({ error: 'Email, password and username are required!' })
-  // }
-
-  // // Determine if email or username exists
-  // User.findOne({ $or: [ {username: username}, {email: email} ] }, (err, user) => {
-  //   if (err) { return next(err) }
-
-  //   if (user) {
-  //     return res.status(422).send({ error: 'Sorry, this email or username already exists!' })
-  //   } 
-  // })
+  if (!email || !password || !username) {
+    return res.status(422).send({ error: 'Email, password and username are required!' })
+  }
 
   // Create new user
   User.create(req.body)
-    .then(res => {
-      res.send({ token: sessionsToken(res.data), user: res.data });
+    .then(user => {
+      res.send({ token: sessionsToken(user), user });
     })
     .catch(err => {
-      console.log(err)
+      // Sends error if user exists
+      return next(err)
     })
 }
 
@@ -43,4 +36,3 @@ exports.login = (req, res, next) => {
   }
   res.send({ token: sessionsToken(req.user), user: req.user });
 }
-

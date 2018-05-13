@@ -1,6 +1,7 @@
 const db = require('../db');
 const Sequelize = require('sequelize');
-const bcrypt = require('bcrypt-nodejs');
+const bluebird = require("bluebird");
+const bcrypt = bluebird.promisifyAll(require('bcrypt-nodejs'));
 
 const User = db.define('user', {
   firstName: { 
@@ -31,45 +32,52 @@ const User = db.define('user', {
     unique: true 
   },
 
-  password: Sequelize.STRING,
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      min: 6,
+      max: 32,
+    },
+  },
   
   admin: { 
-    type: Sequelize.BOOLEAN, 
-    default: false 
+    type: Sequelize.BOOLEAN,
+    defaultValue: false 
   },
   
   researcher: { 
-    type: Sequelize.BOOLEAN, 
-    default: false 
+    type: Sequelize.BOOLEAN,
+    defaultValue: false 
   },
   
   contributor: { 
-    type: Sequelize.BOOLEAN, 
-    default: false 
+    type: Sequelize.BOOLEAN,
+    defaultValue: false 
   },
 
   otherTests: Sequelize.ARRAY(Sequelize.STRING),
 
   kitOrdered: { 
     type: Sequelize.BOOLEAN, 
-    default: false 
+    defaultValue: false 
   },
 
   createdAt: Sequelize.DATE,
   updatedAt: Sequelize.DATE,
 })
 
-User.beforeCreate((user, options) => {
-  bcrypt.genSalt(10, function (err, salt) {
-    // if (err) { return next(err) }
-
-    bcrypt.hash(user.password, salt, null, function (err, hash) {
-      // if (err) { return next(err) }
-
-      user.password = hash;
-      // next();
+User.beforeCreate(function (user, options,) {
+  return bcrypt.genSaltAsync(10)
+    .then(function (salt) {
+      return bcrypt.hashAsync(user.password, salt, null)
     })
-  })
+    .then(function (hash) {
+      user.password = hash
+    })
+    .catch(function (err) {
+      return db.Promise.reject(err)
+    })
 })
 
 // User Model Methods
