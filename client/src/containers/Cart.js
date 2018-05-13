@@ -6,22 +6,25 @@ import CartItem from '../components/cart/CartItem';
 class Cart extends React.Component {
 	componentDidMount () {
 		if (!localStorage.getItem('cart')) {
-			axios.post('/api/cart/new', { _user: 1 }, {
+			axios.post('/api/cart/new', { userId: this.props.currentUser.id }, {
 	      headers: { authorization: localStorage.getItem('token') }
 	    })
 				.then(res => {
-					console.log(res.data.cart._id)
-					localStorage.setItem('cart', res.data.cart._id)
+					console.log(res.data.id)
+					localStorage.setItem('cart', res.data.id)
 				})
 				.catch(err => {
 					console.log(err)
 				})
 		} else {
-			axios.get('/api/cart', { _id: localStorage.getItem('cart') }, {
+			axios.get('/api/cart', {
 	      headers: { authorization: localStorage.getItem('token') }
 	    })
 	    	.then(res => {
-	    		console.log(res.data)
+	    		console.log(res)
+	    	})
+	    	.catch(err => {
+	    		console.log(err)
 	    	})
 		}
 
@@ -60,10 +63,12 @@ class Cart extends React.Component {
 function mapStateToProps (state) {
 	const { cart } = state.Cart;
 	const { products } = state.Products;
+	const { currentUser } = state.Auth; 
 
 	return {
 		cart,
 		products,
+		currentUser,
 	}
 }
 

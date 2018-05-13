@@ -23,7 +23,7 @@ app.use(cors());
 // Use Routes
 app.use(orderRoutes);
 app.use('/api', authRoutes);
-app.use(cartRoutes);
+app.use('/api', cartRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets

@@ -1,17 +1,26 @@
 const Cart = require('../models/Cart');
+const User = require('../models/User');
 
 exports.new = (req, res, next) => {
-	Cart.create({ _user: req.user.id }, function (err, cart) {
-		if (err) { return next(err) }
-
-		res.send({ cart })
-	})
+	Cart
+		.create({ userId: req.user.id })
+		.then(cart => {
+			res.send(cart)
+		})
+		.catch(err => {
+			next(err)
+		})
 }
 
 exports.show = (req, res, next) => {
-	Cart.findOne({ _id: localStorage.getItem('cart') }, function (err, cart) {
-		if (err) { return next(err) }
+	// User
+	// 	.findById(1)
+	// 	.then(cart => {
+	// 		res.json(cart)
+	// 	})
+	// 	.catch(err => {
+	// 		next(err)
+	// 	})
 
-		
-	})
+	User.findOne({where: {id: req.user.id}}).then(user => res.send(user))
 }
