@@ -11,6 +11,7 @@ const { db } = require('./models');
 const authRoutes = require('./routes/authRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const cartRoutes = require('./routes/cartRoutes');
+const indexRoutes = require('./routes')
 
 // Declare app
 const app = express();
@@ -21,9 +22,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // Use Routes
+app.use('/api', cartRoutes);
 app.use(orderRoutes);
 app.use('/api', authRoutes);
-app.use('/api', cartRoutes);
+
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets

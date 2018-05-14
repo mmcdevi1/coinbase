@@ -1,8 +1,9 @@
 const express = require('express');
-const routes  = express.Router();
+const router  = express.Router();
+const Cart = require('../models/Cart');
 
-routes.get('/', function (req, res) {
-  res.render('index')
+router.get('/poop', (req, res) => {
+	Cart.findById(1).then(user => res.send(user))
 })
 
-module.exports = routes;
+module.exports = router;

@@ -18,6 +18,7 @@ class Cart extends React.Component {
 				})
 		} else {
 			axios.get('/api/cart', {
+				params: { id: localStorage.getItem('cart') },
 	      headers: { authorization: localStorage.getItem('token') }
 	    })
 	    	.then(res => {
