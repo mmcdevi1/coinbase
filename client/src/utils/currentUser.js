@@ -16,7 +16,7 @@ function fetchUser () {
     headers: { authorization: localStorage.getItem('token') }
   })
     .then(response => {
-      console.log(response)
+      // console.log(response)
       store.dispatch({
         type: AUTH_USER,
         payload: response.data

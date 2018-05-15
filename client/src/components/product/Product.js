@@ -8,9 +8,9 @@ const { addToCart } = actions;
 
 class Product extends React.Component {
 	addItem = () => {
-		const { products, addToCart, history } = this.props;
+		const { products, addToCart, history, currentUser, cartId } = this.props;
 
-		addToCart( { productId: products[0].id, userId: 1 }, history )
+		addToCart( currentUser, cartId, products[0], history )
 	}
 
 	render () {
@@ -32,9 +32,13 @@ class Product extends React.Component {
 
 function mapStateToProps (state) {
 	const { products } = state.Products;
+	const { currentUser } = state.Auth;
+	const { cartId } = state.Cart;
 
 	return {
 		products,
+		currentUser,
+		cartId,
 	}
 }
 

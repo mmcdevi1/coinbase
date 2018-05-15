@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import PublicRoutes from './router';
 import store from './reducers/store';
 import currentUser from './utils/currentUser';
+import cart from './utils/cart';
 
 class App extends React.Component {
   render () {

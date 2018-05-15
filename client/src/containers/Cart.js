@@ -2,27 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import CartItem from '../components/cart/CartItem';
+import actions from '../actions/cart/actions';
+
+const { setCartItems } = actions;
 
 class Cart extends React.Component {
-	componentDidMount () {
-			axios
-				.post('/api/cart/new', { userId: this.props.currentUser.id }, {
-	      	headers: { authorization: localStorage.getItem('token') }
-	    	})
-				.then(res => {
-					console.log(res)
-					localStorage.setItem('cart', res.data[0].id)
-				})
-				.catch(err => {
-					console.log(err)
-				})
+	componentWillReceiveProps (nextProps) {
+		const { setCartItems } = this.props;
+
+		if (nextProps.cartId !== this.props.cartId) {
+			setCartItems(nextProps.cartId)
+		}
 	}
 
 	renderCartItems () {
-		const { cart, products } = this.props
+		const { products, cartId, cartItems } = this.props;
 
-		if (cart.length) {
-			return cart.map((cartItem, index) => {
+		if (cartItems.length) {
+			return cartItems.map((cartItem, index) => {
 				return (
 					<CartItem 
 						key={index}
@@ -37,6 +34,7 @@ class Cart extends React.Component {
 	}
 
 	render () {
+		console.log(this.props.cartId)
 		return (
 			<div className="cart">
 				<h1>Cart</h1>
@@ -49,15 +47,16 @@ class Cart extends React.Component {
 }
 
 function mapStateToProps (state) {
-	const { cart } = state.Cart;
+	const { cartItems, cartId } = state.Cart;
 	const { products } = state.Products;
 	const { currentUser } = state.Auth; 
 
 	return {
-		cart,
+		cartItems,
 		products,
 		currentUser,
+		cartId,
 	}
 }
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps, { setCartItems })(Cart);

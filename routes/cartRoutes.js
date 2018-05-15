@@ -16,7 +16,9 @@ router.post('/cart/new', authenticateUser, CartController.new);
 router.get('/cart',      authenticateUser, CartController.show);
 
 
-router.post('/cart/:id/item', authenticateUser, CartItemController.new)
+router.post('/cart/item', authenticateUser, CartItemController.new)
+
+router.get('/cart/items', authenticateUser, CartItemController.all)
 
 
 
