@@ -3,7 +3,11 @@ const User = require('../models/User');
 
 exports.new = (req, res, next) => {
 	Cart
-		.create({ userId: req.user.id })
+		.findOrCreate({
+			where: {
+				userId: req.user.id
+			}
+		})
 		.then(cart => {
 			res.send(cart)
 		})

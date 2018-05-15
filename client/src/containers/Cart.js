@@ -5,30 +5,17 @@ import CartItem from '../components/cart/CartItem';
 
 class Cart extends React.Component {
 	componentDidMount () {
-		if (!localStorage.getItem('cart')) {
-			axios.post('/api/cart/new', { userId: this.props.currentUser.id }, {
-	      headers: { authorization: localStorage.getItem('token') }
-	    })
+			axios
+				.post('/api/cart/new', { userId: this.props.currentUser.id }, {
+	      	headers: { authorization: localStorage.getItem('token') }
+	    	})
 				.then(res => {
-					console.log(res.data.id)
-					localStorage.setItem('cart', res.data.id)
+					console.log(res)
+					localStorage.setItem('cart', res.data[0].id)
 				})
 				.catch(err => {
 					console.log(err)
 				})
-		} else {
-			axios.get('/api/cart', {
-				params: { id: localStorage.getItem('cart') },
-	      headers: { authorization: localStorage.getItem('token') }
-	    })
-	    	.then(res => {
-	    		console.log(res)
-	    	})
-	    	.catch(err => {
-	    		console.log(err)
-	    	})
-		}
-
 	}
 
 	renderCartItems () {
