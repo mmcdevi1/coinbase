@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 db
-  .sync()
+  .sync({ force: false })
   .then(() => {
     console.log('[CONNECTION]: Connection to database succeeded.')
 

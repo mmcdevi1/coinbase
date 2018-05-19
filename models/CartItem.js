@@ -4,7 +4,8 @@ const User = require('./User')
 
 // Order Schema Setup
 const CartItem = db.define('cartItem', {
-	productId: Sequelize.INTEGER
+	productId: Sequelize.INTEGER,
+	amount: Sequelize.INTEGER
 });
 
 module.exports = CartItem;

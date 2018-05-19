@@ -4,27 +4,22 @@ import axios from 'axios';
 import CartItem from '../components/cart/CartItem';
 import actions from '../actions/cart/actions';
 
-const { setCartItems } = actions;
+const { setCartItems, removeFromCart } = actions;
 
 class Cart extends React.Component {
-	componentWillReceiveProps (nextProps) {
-		const { setCartItems } = this.props;
-
-		if (nextProps.cartId !== this.props.cartId) {
-			setCartItems(nextProps.cartId)
-		}
-	}
-
 	renderCartItems () {
-		const { products, cartId, cartItems } = this.props;
+		const { products, cartId, cartItems, removeFromCart } = this.props;
 
 		if (cartItems.length) {
 			return cartItems.map((cartItem, index) => {
 				return (
 					<CartItem 
 						key={index}
+						index={index}
 						products={products}
 						cartItem={cartItem}
+						removeFromCart={removeFromCart}
+						cartId={cartId}
 					/>
 				)
 			})
@@ -59,4 +54,4 @@ function mapStateToProps (state) {
 	}
 }
 
-export default connect(mapStateToProps, { setCartItems })(Cart);
+export default connect(mapStateToProps, { setCartItems, removeFromCart })(Cart);

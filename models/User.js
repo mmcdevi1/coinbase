@@ -63,9 +63,6 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN, 
     defaultValue: false 
   },
-
-  createdAt: Sequelize.DATE,
-  updatedAt: Sequelize.DATE,
 })
 
 User.beforeCreate(function (user, options,) {

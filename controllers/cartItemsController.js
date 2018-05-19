@@ -4,10 +4,12 @@ const User = require('../models/User');
 
 exports.new = (req, res, next) => {
 	CartItem
-		.create({
-			userId: req.user.id,
-			productId: req.body.productId,
-			cartId: req.body.cartId
+		.findOrCreate({
+			where: {
+				userId: req.user.id,
+				productId: req.body.productId,
+				cartId: req.body.cartId
+			}
 		})
 		.then(item => {
 			res.send(item)
@@ -18,15 +20,29 @@ exports.new = (req, res, next) => {
 }
 
 exports.all = (req, res, next) => {
-	console.log(req.query)
 	CartItem
 		.findAll({
 			where: {
-				cartId: req.query.cartId
+				cartId: req.params.id
 			}
 		})
 		.then(items => {
 			res.send(items)
+		})
+		.catch(err => {
+			next(err)
+		})
+}
+
+exports.destroy = (req, res, next) => {
+	CartItem
+		.destroy({
+			where: {
+				id: req.params.itemId
+			}
+		})
+		.then(item => {
+			res.status(204).end()
 		})
 		.catch(err => {
 			next(err)

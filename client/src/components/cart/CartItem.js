@@ -16,8 +16,10 @@ class CartItem extends React.Component {
 	}
 
 	render () {
+		const { removeFromCart, index, cartId, cartItem } = this.props;
+
 		return (
-			<div>
+			<div onClick={() => removeFromCart(index, cartId, cartItem.id)}>
 				{ 
 					this.renderItem()
 				}

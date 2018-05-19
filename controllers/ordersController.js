@@ -20,9 +20,14 @@ exports.new = (req, res, next) => {
     updatedAt: Date.now()
   }
 
-  Order.create(order, (err, order) => {
-    if (err) { return next(err) }
-
-    res.send( {order: order} )
-  })
+  Order
+    .create({
+      // something
+    })
+    .then(order => {
+      res.send(order)
+    })
+    .catch(err => {
+      next(err)
+    })
 }
