@@ -12,6 +12,7 @@ import Dashboard from './components/Dashboard';
 import WizardForm from './components/wizard';
 import Product from './components/product/Product';
 import Cart from './containers/Cart';
+import Checkout from './containers/Checkout';
 
 import actions from './actions/cart/actions';
 
@@ -45,6 +46,7 @@ class PublicRoutes extends React.Component {
           <Route path="/logout"      component={Logout} />  
           <Route exact path="/kit"   component={Product} />
           <Route path="/cart"        component={AuthenticateUser(Cart)} />
+          <Route path="/checkout"    component={AuthenticateUser(Checkout)} />
           <Route path="/kit/request" component={AuthenticateUser(WizardForm)} />
           <Route path="/marketplace" component={AuthenticateUser(Marketplace)} />
           <Route path="/dashboard"   component={AuthenticateUser(Dashboard)} />

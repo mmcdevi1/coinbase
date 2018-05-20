@@ -8,10 +8,16 @@ User.hasMany(Cart);
 Cart.belongsTo(User);
 
 Cart.hasMany(CartItem);
-CartItem.belongsTo(Cart)
+CartItem.belongsTo(Cart);
 
 User.hasMany(CartItem);
 CartItem.belongsTo(User);
+
+User.hasMany(Order);
+Order.belongsTo(User);
+
+Order.hasMany(CartItem);
+CartItem.belongsTo(Order);
 
 module.exports = {
   db,

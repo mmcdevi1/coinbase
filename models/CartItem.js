@@ -8,4 +8,21 @@ const CartItem = db.define('cartItem', {
 	amount: Sequelize.INTEGER
 });
 
+CartItem.updateOrderId = (userId, orderId) => {
+	CartItem
+		.findAll({
+			where: {
+				userId
+			}
+		})
+		.then(items => {
+			items.forEach(item => {
+				item.update({ orderId })
+			})
+		})
+		.catch(err => {
+			console.log(err)
+		})
+}
+
 module.exports = CartItem;

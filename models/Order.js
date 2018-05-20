@@ -1,5 +1,6 @@
 const db = require('../db');
 const Sequelize = require('sequelize');
+const CartItem = require('./CartItem')
 
 // Order Schema Setup
 const Order = db.define('order', {
@@ -11,5 +12,11 @@ const Order = db.define('order', {
   expiryYr:    Sequelize.STRING,
   ccCvv:       Sequelize.STRING,
 });
+
+Order.afterCreate((order, options) => {
+	const { userId, id } = order;
+
+	CartItem.updateOrderId(userId, id)
+})
 
 module.exports = Order;

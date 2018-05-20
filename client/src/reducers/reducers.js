@@ -3,6 +3,7 @@ import Auth from './authReducer';
 import User from './usersReducer';
 import Cart from './cartReducer';
 import Products from './productsReducer';
+import Orders from './ordersReducer';
 
 export default {
   form: reduxForm,
@@ -10,4 +11,5 @@ export default {
   User,
   Cart,
   Products,
+  Orders,
 }

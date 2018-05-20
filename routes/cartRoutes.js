@@ -30,6 +30,13 @@ router.post(
 	CartItemController.new
 )
 
+// Cart Item PUT route 
+router.put(
+	'/cart/item',
+	authenticateUser, 
+	CartItemController.update
+)
+
 // Cart Item GET all route
 router.get(
 	'/cart/:id/items',

@@ -19,6 +19,17 @@ exports.new = (req, res, next) => {
 		})
 }
 
+exports.update = (req, res, next) => {
+	CartItem
+		.findById(req.body.cartItemId)
+		.then(item => {
+			item.update(req.body)
+		})
+		.catch(err => {
+			next(err)
+		})
+}
+
 exports.all = (req, res, next) => {
 	CartItem
 		.findAll({

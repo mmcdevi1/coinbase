@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import CartItem from '../components/cart/CartItem';
@@ -36,6 +37,9 @@ class Cart extends React.Component {
 				{
 					this.renderCartItems()
 				}
+				<div>
+					<Link to='/checkout'>Checkout</Link>
+				</div>
 			</div>
 		)
 	}
