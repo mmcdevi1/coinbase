@@ -8,12 +8,14 @@
     "npm": "5.0.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node node_modules/jest/bin/jest.js",
     "start": "node app.js",
     "client": "npm run start --prefix client",
     "server": "nodemon index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios"
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +34,8 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-rc.4",
+    "react": "^16.3.2",
+    "react-native": "^0.55.3",
     "smoothscroll": "^0.4.0"
   },
   "devDependencies": {
