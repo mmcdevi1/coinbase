@@ -23,7 +23,7 @@ app.use(cors());
 
 // Use Routes
 app.use('/api', cartRoutes);
-app.use(orderRoutes);
+app.use('/api', orderRoutes);
 app.use('/api', authRoutes);
 
 
@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === 'production') {
 db
   .sync({ force: false })
   .then(() => {
-    console.log('[CONNECTION]: Connection to database succeeded.')
+    console.log('[SUCCESS]: Connection to database succeeded.')
 
     app.listen(process.env.PORT || 5000, function(){
       console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);

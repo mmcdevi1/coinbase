@@ -1,6 +1,8 @@
 const db = require('../db');
 const Sequelize = require('sequelize');
-const CartItem = require('./CartItem')
+const Cart = require('./Cart');
+const CartItem = require('./CartItem');
+const OrderItem = require('./OrderItem')
 
 // Order Schema Setup
 const Order = db.define('order', {
@@ -13,10 +15,18 @@ const Order = db.define('order', {
   ccCvv:       Sequelize.STRING,
 });
 
-Order.afterCreate((order, options) => {
+Order.afterCreate(async (order, options) => {
 	const { userId, id } = order;
 
-	CartItem.updateOrderId(userId, id)
+	const cartItems = await CartItem.findAll({ where: { userId } })
+
+	cartItems.forEach(item => {
+		const { productId } = item;
+
+		OrderItem.createAfterOrder({ productId, orderId: id, userId })
+	})
+
+	Cart.destroy({ where: { userId } })
 })
 
 module.exports = Order;

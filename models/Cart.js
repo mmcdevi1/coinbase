@@ -7,4 +7,8 @@ const Cart = db.define('cart', {
 
 });
 
+Cart.destroyAfterOrder = () => {
+	// Cart.find
+}
+
 module.exports = Cart;

@@ -3,11 +3,16 @@ const User = require('./User');
 const Cart = require('./Cart');
 const CartItem = require('./CartItem');
 const Order = require('./Order');
+const OrderItem = require('./OrderItem');
 
 User.hasMany(Cart);
 Cart.belongsTo(User);
 
-Cart.hasMany(CartItem);
+// Destroy cart and all its cart items
+Cart.hasMany(CartItem, {
+  onDelete: 'cascade',
+  hooks: true
+});
 CartItem.belongsTo(Cart);
 
 User.hasMany(CartItem);
@@ -16,8 +21,11 @@ CartItem.belongsTo(User);
 User.hasMany(Order);
 Order.belongsTo(User);
 
-Order.hasMany(CartItem);
-CartItem.belongsTo(Order);
+Order.hasMany(OrderItem);
+OrderItem.belongsTo(Order);
+
+User.hasMany(OrderItem);
+OrderItem.belongsTo(User);
 
 module.exports = {
   db,
@@ -25,4 +33,5 @@ module.exports = {
   Cart,
   CartItem,
   Order,
+  OrderItem,
 };

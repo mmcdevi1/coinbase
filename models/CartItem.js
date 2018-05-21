@@ -5,7 +5,7 @@ const User = require('./User')
 // Order Schema Setup
 const CartItem = db.define('cartItem', {
 	productId: Sequelize.INTEGER,
-	amount: Sequelize.INTEGER
+	amount: Sequelize.INTEGER,
 });
 
 CartItem.updateOrderId = (userId, orderId) => {
@@ -17,7 +17,7 @@ CartItem.updateOrderId = (userId, orderId) => {
 		})
 		.then(items => {
 			items.forEach(item => {
-				item.update({ orderId })
+				item.update({ orderId, cartId: null, ordered: true })
 			})
 		})
 		.catch(err => {

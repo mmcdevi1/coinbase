@@ -13,9 +13,9 @@ const requireLogin     = passport.authenticate('local', { session: false });
 const authenticateUser = passport.authenticate('jwt', { session: false }); // T
 
 // Order create POST route
-router.post('/api/order/new', authenticateUser, Orders.new);
+router.post('/order/new', authenticateUser, Orders.new);
 
-router.get('/api/orders', authenticateUser, (req, res) => {
+router.get('/orders', authenticateUser, (req, res) => {
   Order.find({ _user: req.user.id }, (err, order) => {
     res.send(order)
   });
