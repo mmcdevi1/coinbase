@@ -1,20 +1,17 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // Require Models
-require('./models/User'); // USER MODEL
-require('./models/Order'); // ORDER MODEL
+const { db } = require('./models');
 
 // Require Routes
 const authRoutes = require('./routes/authRoutes');
 const orderRoutes = require('./routes/orderRoutes');
-
-// Connect MongoDB with mLab.com in Development
-mongoose.connect(keys.mongoURI);
+const cartRoutes = require('./routes/cartRoutes');
+const indexRoutes = require('./routes')
 
 // Declare app
 const app = express();
@@ -25,8 +22,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // Use Routes
-app.use(orderRoutes);
-app.use(authRoutes);
+app.use('/api', cartRoutes);
+app.use('/api', orderRoutes);
+app.use('/api', authRoutes);
+
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
@@ -41,8 +40,42 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-// Listen on port 5000 in Development
-// const PORT = process.env.PORT || 5000;
-app.listen(process.env.PORT || 5000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-});
+db
+  .sync({ force: false })
+  .then(() => {
+    console.log('[SUCCESS]: Connection to database succeeded.')
+
+    app.listen(process.env.PORT || 5000, function(){
+      console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+    });
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

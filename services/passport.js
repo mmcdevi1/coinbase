@@ -10,18 +10,21 @@ const User = require('../models/User');
 passport.use(new LocalStrategy(
   function (username, password, done) {
     // Verify username and password
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err) }
-      if (!user) { return done(null, false, { message: 'Invalid email address or password' }) } 
+    User.findOne({ where: { username: username } })
+      .then(user => {
+        if (!user) { return done(null, false, { message: 'Invalid email address or password' }) } 
 
-      user.comparePassword(password, function (err, isMatch) {
-        if (err) { return done(err) }
-        if (!isMatch) { return done(null, false) }
+        user.comparePassword(password, function (err, isMatch) {
+          if (err) { return done(err) }
+          if (!isMatch) { return done(null, false) }
 
-        // If user exists and passwords match
-        return done(null, user);
+          // If user exists and passwords match
+          return done(null, user);
+        })
       })
-    })
+      .catch(err => {
+        if (err) { return done(err) }
+      })
   }
 ));
 
@@ -34,14 +37,16 @@ passport.use(new JwtStrategy(
   },
   function (payload, done) {
     // Find User
-    User.findById(payload.sub, function (err, user) {
-      if (err) { return done(err, false) }
-
-      if (user) {
-        return done(null, user);
-      } else {
-        return done(null, false);
-      }
-    })
+    User.findById(payload.sub)
+      .then(user => {
+        if (user) {
+          return done(null, user);
+        } else {
+          return done(null, false);
+        }
+      })
+      .catch(err => {
+        if (err) { return done(err, false) }
+      })
   }
 ));

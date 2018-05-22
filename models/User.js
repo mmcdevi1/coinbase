@@ -1,51 +1,90 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt-nodejs');
+const db = require('../db');
+const Sequelize = require('sequelize');
+const bluebird = require("bluebird");
+const bcrypt = bluebird.promisifyAll(require('bcrypt-nodejs'));
+const Cart = require('./Cart')
 
-// User Schema Setup
-const UserSchema = new mongoose.Schema({
-  firstName:   String,
-  lastName:    String,
-  address: {
-    street:    String,
-    city:      String,
-    state:     String,
-    zipcode:   String
+const User = db.define('user', {
+  firstName: { 
+    type: Sequelize.STRING, 
+    allowNull: false 
   },
-  email:       { type: String, unique: true, lowercase: true },
-  username:    { type: String, unique: true },
-  password:    String,
-  admin:       { type: Boolean, default: false },
-  researcher:  { type: Boolean, default: false },
-  contributor: { type: Boolean, default: false },
-  otherTests:  [{ type: String }],
-  kitOrdered:  Boolean,
-  createdAt:   Date,
-  updatedAt:   Date,
+
+  lastName: { 
+    type: Sequelize.STRING, 
+    allowNull: false 
+  },  
+
+  street: Sequelize.STRING,
+  city:  Sequelize.STRING,
+  state: Sequelize.STRING,
+  zipcode: Sequelize.STRING,  
+
+  email: { 
+    type: Sequelize.STRING, 
+    unique: true, 
+    validate: {
+      isLowercase: true
+    }
+  },
+
+  username: { 
+    type: Sequelize.STRING, 
+    unique: true 
+  },
+
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      min: 6,
+      max: 32,
+    },
+  },
+  
+  admin: { 
+    type: Sequelize.BOOLEAN,
+    defaultValue: false 
+  },
+  
+  researcher: { 
+    type: Sequelize.BOOLEAN,
+    defaultValue: false 
+  },
+  
+  contributor: { 
+    type: Sequelize.BOOLEAN,
+    defaultValue: false 
+  },
+
+  otherTests: Sequelize.ARRAY(Sequelize.STRING),
+
+  kitOrdered: { 
+    type: Sequelize.BOOLEAN, 
+    defaultValue: false 
+  },
 })
 
-// Encrypt password with Bcrypt
-UserSchema.pre('save', function (next) {
-  const user = this;
-
-  bcrypt.genSalt(10, function (err, salt) {
-    if (err) { return next(err) }
-
-    bcrypt.hash(user.password, salt, null, function (err, hash) {
-      if (err) { return next(err) }
-
-      user.password = hash;
-      next();
+User.beforeCreate(function (user, options,) {
+  return bcrypt.genSaltAsync(10)
+    .then(function (salt) {
+      return bcrypt.hashAsync(user.password, salt, null)
     })
-  })
-});
+    .then(function (hash) {
+      user.password = hash
+    })
+    .catch(function (err) {
+      return db.Promise.reject(err)
+    })
+})
 
 // User Model Methods
-UserSchema.methods.orders = function () {
+User.prototype.orders = function () {
 
 }
 
 // Compare user input password on login to the encrypted password
-UserSchema.methods.comparePassword = function (password, callback) {
+User.prototype.comparePassword = function (password, callback) {
   bcrypt.compare(password, this.password, function (err, res) {
     if (err) { return callback(err) }
 
@@ -53,4 +92,6 @@ UserSchema.methods.comparePassword = function (password, callback) {
   })
 }
 
-module.exports = mongoose.model('User', UserSchema);
+// User.hasMany(Cart)
+
+module.exports = User;
