@@ -7,12 +7,6 @@ const cors = require('cors');
 // Require Models
 const { db } = require('./models');
 
-// Require Routes
-const authRoutes = require('./routes/authRoutes');
-const orderRoutes = require('./routes/orderRoutes');
-const cartRoutes = require('./routes/cartRoutes');
-const indexRoutes = require('./routes')
-
 // Declare app
 const app = express();
 
@@ -22,9 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // Use Routes
-app.use('/api', cartRoutes);
-app.use('/api', orderRoutes);
-app.use('/api', authRoutes);
+app.use('/api', require('./routes'))
 
 
 if (process.env.NODE_ENV === 'production') {

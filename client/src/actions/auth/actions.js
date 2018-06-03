@@ -15,7 +15,7 @@ const authActions = {
 
   signinUser: ({ username, password }, history) => {
     return (dispatch) => {
-      axios.post('/api/login', { username, password })
+      axios.post('/api/auth/login', { username, password })
       .then(res => {
         console.log(res)
         dispatch({ 
@@ -44,7 +44,7 @@ const authActions = {
 
   registerUser: function ({ firstName, lastName, username, email, password, passwordConfirm }, history) {
     return (dispatch) => {
-      axios.post('/api/register', { firstName, lastName, username, email, password, passwordConfirm })
+      axios.post('/api/auth/register', { firstName, lastName, username, email, password, passwordConfirm })
       .then(res => {
         console.log(res)
         dispatch({ type: authActions.AUTH_USER, payload: res.data.user })
@@ -59,7 +59,7 @@ const authActions = {
 
   updateUser: function (body) {
     return (dispatch) => {
-      axios.put('/api/update_current_user', body, {
+      axios.put('/api/auth/update_current_user', body, {
         headers: { authorization: localStorage.getItem('token') }
       })
       .then(res => {

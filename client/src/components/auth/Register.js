@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import BackButton from './BackButton';
 import Center from './Center';
 import authActions from '../../actions/auth';
-import Logo from '../utilities/logo-black';
 
 const FIELDS = [
   { label: 'First Name', name: 'firstName' },

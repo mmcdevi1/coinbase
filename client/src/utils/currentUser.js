@@ -12,7 +12,7 @@ if (token) {
 }
 
 function fetchUser () {
-  axios.get('/api/current_user', {
+  axios.get('/api/auth/current_user', {
     headers: { authorization: localStorage.getItem('token') }
   })
     .then(response => {

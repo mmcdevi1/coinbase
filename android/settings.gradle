@@ -1,3 +1,0 @@
-rootProject.name = 'dna_blockchain'
-
-include ':app'

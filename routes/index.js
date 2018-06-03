@@ -1,9 +1,12 @@
 const express = require('express');
 const router  = express.Router();
-const Cart = require('../models/Cart');
 
-router.get('/poop', (req, res) => {
-	Cart.findById(1).then(user => res.send(user))
+router.use('/auth', require('./authRoutes'))
+
+router.use((req, res, next) => {
+  const err = new Error('API route not found!')
+  err.status = 404
+  next(err)
 })
 
 module.exports = router;

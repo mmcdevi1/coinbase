@@ -8,7 +8,7 @@ const userActions = {
 
   getUser: function () {
     return (dispatch) => {
-      axios.get(`/api/${params}`, {
+      axios.get(`/api/auth/${params}`, {
         headers: { authorization: localStorage.getItem('token') }
       })
       .then(res => {
