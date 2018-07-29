@@ -1,0 +1,156 @@
+/* Reset */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root, html, body, .app {
+  height: 100%;
+}
+
+/* General */
+
+.padding-15 {
+  padding: 15px;
+}
+
+.padding-30 {
+  padding: 30px;
+}
+
+/* Flex */
+
+.box {
+  display: flex;
+  width: 100%;
+  height: inherit;
+}
+
+.content {
+  flex-flow: row wrap;
+}
+
+.flex-none {
+  flex: none;
+}
+
+.flex-1 {
+  flex: 1
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+/* Columns */
+
+.columns {
+  display: flex;
+  flex-flow: row wrap;
+  width: inherit;
+}
+
+.column {
+  display: block;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.column.quarter {
+  flex: none;
+  width: 25%;
+}
+
+.column.one-third {
+  flex: none;
+  width: 33.3333%;
+}
+
+.column.half {
+  flex: none;
+  width: 50%;
+}
+
+.column.two-third {
+  flex: none;
+  width: 66.6666%;
+}
+
+.column.three-quarter {
+  flex: none;
+  width: 75%;
+}
+
+/* Aside */
+
+.aside {
+  height: 100%;
+}
+
+.aside.quarter {
+  flex: none;
+  width: 25%;
+}
+
+/* Header */
+
+header {
+
+}
+
+/* Background Color */
+
+.bg-navy {
+  background-color: #001f3f;
+}
+.bg-blue {
+  background-color: #0074d9;
+}
+.bg-aqua {
+  background-color: #7fdbff;
+}
+.bg-teal {
+  background-color: #39cccc;
+}
+.bg-olive {
+  background-color: #3d9970;
+}
+.bg-green {
+  background-color: #2ecc40;
+}
+.bg-lime {
+  background-color: #01ff70;
+}
+.bg-yellow {
+  background-color: #ffdc00;
+}
+.bg-orange {
+  background-color: #ff851b;
+}
+.bg-red {
+  background-color: #ff4136;
+}
+.bg-fuchsia {
+  background-color: #f012be;
+}
+.bg-purple {
+  background-color: #b10dc9;
+}
+.bg-maroon {
+  background-color: #85144b;
+}
+.bg-white {
+  background-color: #ffffff;
+}
+.bg-gray {
+  background-color: #aaaaaa;
+}
+.bg-silver {
+  background-color: #dddddd;
+}
+.bg-black {
+  background-color: #111111;
+}
