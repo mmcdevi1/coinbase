@@ -5,8 +5,13 @@ class Home extends React.Component {
 	render () {
 		return (
       <FlexBox className="flex-column">
-        <Header className="bg-green">
-          headera
+        <Header className="flex bg-green align-items-center">
+          <div className="flex bg-navy aside quarter">
+            Logo
+          </div>
+          <div className="">
+            Links
+          </div>  
         </Header>
         <FlexBox>
           <Aside />
